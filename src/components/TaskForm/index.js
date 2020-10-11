@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { TaskListContext } from '../../contexts/TaskListContext'
 
+import './styles.css'
+
 const TaskForm = () => {
   const { addTask, completedList, incompleteList, allTasks, editTask, editItem } = useContext(TaskListContext)
   const [title, setTitle] = useState('')
@@ -27,31 +29,32 @@ const TaskForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit} className="form">
-        <button type="submit" className="btn add-task-btn">
-          {editItem ? 'Alterar' : 'Criar'}
+        <div className='form-submit'>
+          <input
+            type="text"
+            placeholder="Adicionar Tarefa..."
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+            required
+            className="task-input"
+          />
+        </div>
+        <button type="submit" className="btn button-add">
+          {editItem ? 'Alterar' : 'Gravar'}
         </button>
-        <input
-          type="text"
-          placeholder="Adicionar Tarefa..."
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-          required
-          className="task-input"
-        />
-
       </form>
 
       <div className="buttons">
 
         <button className="btn clear-btn" onClick={incompleteList}>
           Abertas
-</button>
+        </button>
         <button className="btn clear-btn" onClick={completedList}>
           Concluídas
-</button>
+        </button>
         <button className="btn clear-btn" onClick={allTasks}>
           Todas
-</button>
+        </button>
       </div>
 
     </>
